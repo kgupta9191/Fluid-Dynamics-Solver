@@ -1,1 +1,1 @@
-# Fluid-Dynamics-Solver
+# Fluid Dynamics Solver
