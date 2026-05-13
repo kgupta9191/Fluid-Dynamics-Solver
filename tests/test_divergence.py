@@ -39,12 +39,10 @@ def test_projection_step_reduces_divergence():
         u, v, u_bc, v_bc, u_t, u_b, u_l, u_r, v_t, v_b, v_l, v_r, nx, ny
     )
     u_star, v_star = intermediateVelocity(u.copy(), v.copy(), rho, mu, nx, ny, dx, dy, del_t)
-    p = pressureSolve(u_star.copy(), v_star.copy(), rho, nx, ny, dx, dy, del_t, t=0)
-    u_next, v_next, _, _ = finalVelocity(
-        p, u_star.copy(), v_star.copy(), rho, nx, ny, dx, dy, del_t
-    )
-
     before = np.linalg.norm(_divergence(u_star, v_star))
+
+    p = pressureSolve(u_star, v_star, rho, nx, ny, dx, dy, del_t, t=0)
+    u_next, v_next, _, _ = finalVelocity(p, u_star, v_star, rho, nx, ny, dx, dy, del_t)
     after = np.linalg.norm(_divergence(u_next, v_next))
 
     assert np.isfinite(before)

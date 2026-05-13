@@ -5,7 +5,7 @@ from pathlib import Path
 
 try:
     from mpi4py import MPI  # noqa: F401
-except Exception:
+except (ImportError, RuntimeError):
     class _FakeComm:
         def Get_size(self):
             return 1
