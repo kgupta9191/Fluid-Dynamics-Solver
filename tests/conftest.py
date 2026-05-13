@@ -1,5 +1,6 @@
 import sys
 import types
+from pathlib import Path
 
 
 try:
@@ -23,3 +24,9 @@ except Exception:
     fake_mpi4py = types.ModuleType("mpi4py")
     fake_mpi4py.MPI = _FakeMPI()
     sys.modules["mpi4py"] = fake_mpi4py
+
+
+def pytest_sessionfinish(session, exitstatus):
+    generated_file = Path.cwd() / "pressureSolverConvergenceData.txt"
+    if generated_file.exists():
+        generated_file.unlink()
