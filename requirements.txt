@@ -2,5 +2,4 @@ numpy
 pytest
 matplotlib
 mpi4py
-time
 h5py
